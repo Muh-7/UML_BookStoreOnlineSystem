@@ -1,0 +1,130 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Sequence - Registration + Activation">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="10">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- Lifelines (actors + systems) -->
+        <mxCell id="User" value="User" vertex="1" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;"/>
+        <mxCell id="WebUI" value="Web UI" vertex="1" parent="1" style="shape=rectangle;rounded=1;strokeColor=#000000;fillColor=none;"/>
+        <mxCell id="Auth" value="Auth Service" vertex="1" parent="1" style="shape=rectangle;rounded=1;strokeColor=#000000;fillColor=none;"/>
+        <mxCell id="DB" value="Database" vertex="1" parent="1" style="shape=database;strokeColor=#000000;fillColor=none;"/>
+        <mxCell id="Email" value="Email System" vertex="1" parent="1" style="shape=rectangle;rounded=1;strokeColor=#000000;fillColor=none;"/>
+
+        <!-- Position lifelines horizontally -->
+        <mxCell id="geoUser" parent="User" style="geometry" vertex="1">
+          <mxGeometry x="80" y="40" width="40" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="geoWebUI" parent="WebUI" style="geometry" vertex="1">
+          <mxGeometry x="240" y="40" width="100" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="geoAuth" parent="Auth" style="geometry" vertex="1">
+          <mxGeometry x="420" y="40" width="120" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="geoDB" parent="DB" style="geometry" vertex="1">
+          <mxGeometry x="620" y="40" width="100" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="geoEmail" parent="Email" style="geometry" vertex="1">
+          <mxGeometry x="800" y="40" width="120" height="40" as="geometry"/>
+        </mxCell>
+
+        <!-- Dotted Lifelines -->
+        <mxCell id="llUser" style="edgeStyle=none;dashed=1;html=1;strokeColor=#000000;" edge="1" parent="1" source="User" target="User">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="100" y="120" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="llWebUI" style="edgeStyle=none;dashed=1;html=1;strokeColor=#000000;" edge="1" parent="1" source="WebUI" target="WebUI">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="290" y="120" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="llAuth" style="edgeStyle=none;dashed=1;html=1;strokeColor=#000000;" edge="1" parent="1" source="Auth" target="Auth">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="480" y="120" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="llDB" style="edgeStyle=none;dashed=1;html=1;strokeColor=#000000;" edge="1" parent="1" source="DB" target="DB">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="660" y="120" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="llEmail" style="edgeStyle=none;dashed=1;html=1;strokeColor=#000000;" edge="1" parent="1" source="Email" target="Email">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="850" y="120" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Sequence Messages -->
+        <!-- Registration -->
+        <mxCell id="msg1" value="enterRegistrationData()" edge="1" parent="1" source="User" target="WebUI"
+          style="endArrow=block;html=1;strokeColor=#000000;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="msg2" value="registerUser(data)" edge="1" parent="1" source="WebUI" target="Auth"
+          style="endArrow=block;html=1;strokeColor=#000000;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="msg3" value="checkEmail(email)" edge="1" parent="1" source="Auth" target="DB"
+          style="endArrow=block;html=1;strokeColor=#000000;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="msg4" value="emailNotFound" edge="1" parent="1" source="DB" target="Auth"
+          style="endArrow=open;dashed=1;html=1;strokeColor=#888888;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="msg5" value="saveUser(status=Inactive)" edge="1" parent="1" source="Auth" target="DB"
+          style="endArrow=block;html=1;strokeColor=#000000;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="msg6" value="sendActivationEmail(token)" edge="1" parent="1" source="Auth" target="Email"
+          style="endArrow=block;html=1;strokeColor=#000000;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Activation -->
+        <mxCell id="msg7" value="clickActivationLink()" edge="1" parent="1" source="User" target="WebUI"
+          style="endArrow=block;html=1;strokeColor=#000000;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="msg8" value="activateAccount(token)" edge="1" parent="1" source="WebUI" target="Auth"
+          style="endArrow=block;html=1;strokeColor=#000000;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="msg9" value="updateUserStatus(Active)" edge="1" parent="1" source="Auth" target="DB"
+          style="endArrow=block;html=1;strokeColor=#000000;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="msg10" value="statusUpdated" edge="1" parent="1" source="DB" target="Auth"
+          style="endArrow=open;dashed=1;html=1;strokeColor=#888888;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="msg11" value="activationSuccess()" edge="1" parent="1" source="Auth" target="WebUI"
+          style="endArrow=block;html=1;strokeColor=#000000;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="msg12" value="showConfirmation()" edge="1" parent="1" source="WebUI" target="User"
+          style="endArrow=block;html=1;strokeColor=#000000;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
+
